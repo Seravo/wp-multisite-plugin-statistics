@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== WP Multisite Plugin Statistics ===
 Contributors: onnimonni
 Tags: multisite, plugins
 Requires at least: 3.1

@@ -1,4 +1,4 @@
-WordPress Multisite Plugin Stats
+WP Multisite Plugin Statistics
 ================================
 
 A multisite plugin to show plugin activations across all your sites. 
