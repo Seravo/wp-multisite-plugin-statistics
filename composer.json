@@ -1,0 +1,17 @@
+{
+  "name": "seravo/wp-multisite-plugin-statistics",
+  "type": "wordpress-plugin",
+  "license": "GPLv2",
+  "description": "A multisite plugin to show statistics of plugin activations across all your sites. ",
+  "homepage": "https://github.com/Seravo/wp-https-domain-alias",
+  "authors": [
+    {
+      "name": "Onni Hakala",
+      "email": "onni@seravo.fi",
+      "homepage": "https://github.com/onnimonni"
+    }
+  ],
+  "keywords": [
+    "wordpress","multisite", "mu", "plugin", "usage", "statistics"
+  ]
+}
