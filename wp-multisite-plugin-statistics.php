@@ -29,6 +29,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	 02110-1301	 USA
 
 class MultisitePluginStats {
 	public function __construct() {
+	}
+
+	public function init() {
 		// declare hooks
 		add_action( 'network_admin_menu', array( $this, 'add_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
@@ -37,7 +40,6 @@ class MultisitePluginStats {
 		add_action( 'wp_ajax_deactivate_network_plugins', array( $this, 'deactivate_network_plugins' ) );
 		add_action( 'wp_ajax_deactivate_plugins', array( $this, 'deactivate_plugins' ) );
 		add_action( 'wp_ajax_delete_plugins', array( $this, 'delete_plugins' ) );
-
 	}
 
 	public function localization() {
@@ -274,3 +276,4 @@ class MultisitePluginStats {
 }
 
 $multisite_plugin_stats = new MultisitePluginStats();
+$multisite_plugin_stats->init();
