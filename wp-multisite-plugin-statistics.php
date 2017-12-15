@@ -174,6 +174,9 @@ class MultisitePluginStats {
 				<tbody>
 					<?php
 					foreach ( $network_plugins as $plugin => $etc ) {
+						if ( empty( $plugin_info[ $plugin ] ) ) {
+							continue;
+						}
 						echo '<tr><th scope="row" class="check-column"><input type="checkbox" name="checked[]" value="' . plugin_basename( $plugin ) . '" id=""></th>';
 						echo '<td>' . $plugin_info[ $plugin ]['Name'] . '</td>';
 						echo '<td>' . plugin_basename( $plugin ) . '</td></tr>';
