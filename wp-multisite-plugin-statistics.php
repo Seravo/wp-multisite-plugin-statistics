@@ -115,7 +115,7 @@ class MultisitePluginStats {
 			<h1><?php esc_html_e( 'Plugin Statistics', 'multisite_plugin_stats' ); ?></h1>
 
 			<h3><?php esc_html_e( 'Active Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $active_plugins ); ?>)</h3>
-			<table class="wp-list-table widefat plugin-usage-table">
+			<table id="stats-active-plugins" class="wp-list-table widefat plugin-usage-table">
 				<thead>
 					<tr>
 						<th data-dynatable-no-sort="true" class="manage-column column-cb check-column">
@@ -161,7 +161,7 @@ class MultisitePluginStats {
 			</table>
 
 			<h3><?php esc_html_e( 'Network Activated Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $network_plugins ); ?>)</h3>
-			<table class="wp-list-table widefat plugin-usage-table">
+			<table id="stats-network-plugins" class="wp-list-table widefat plugin-usage-table">
 				<thead>
 					<tr>
 						<th data-dynatable-no-sort="true" class="manage-column column-cb check-column">
@@ -185,7 +185,7 @@ class MultisitePluginStats {
 			</table>
 
 			<h3><?php esc_html_e( 'Inactive Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $plugin_info ); ?>)</h3>
-			<table class="wp-list-table widefat plugin-usage-table">
+			<table id="stats-inactive-plugins" class="wp-list-table widefat plugin-usage-table">
 				<thead>
 					<tr>
 						<th data-dynatable-no-sort="true" class="manage-column column-cb check-column">
