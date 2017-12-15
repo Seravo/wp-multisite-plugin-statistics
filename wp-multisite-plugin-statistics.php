@@ -13,7 +13,7 @@ Copyright 2012	Lewis J. Goettner, III	(email : lew@goettner.net)
 Copyright 2015	Onni Hakala / Seravo Oy	(email : onni@seravo.fi)
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
+it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
@@ -37,7 +37,7 @@ class MultisitePluginStats {
 		add_action( 'wp_ajax_deactivate_network_plugins', array( $this, 'deactivate_network_plugins' ));
 		add_action( 'wp_ajax_deactivate_plugins', array( $this, 'deactivate_plugins' ));
 		add_action( 'wp_ajax_delete_plugins', array( $this, 'delete_plugins' ));
-		
+
 	}
 
 	public function MultisitePluginStats() {
@@ -69,17 +69,17 @@ class MultisitePluginStats {
 		$params = array();
 		parse_str($_POST['plugins'], $params);
 		$plugins = $params['checked'];
-		
-    	set_time_limit(120);
+
+		set_time_limit(120);
 
 		$blogs = $wpdb->get_col("SELECT blog_id FROM {$wpdb->blogs} WHERE site_id = {$wpdb->siteid} AND spam = 0");
 		if ($blogs)	{
-	    	foreach ($blogs as $blog_id)	{
-		   		switch_to_blog($blog_id);
-		   		foreach ($plugins as $plugin) {
-		   			deactivate_plugins($plugin, true); //silently deactivate the plugin
-		   		}
-			    restore_current_blog();
+			foreach ($blogs as $blog_id)	{
+				switch_to_blog($blog_id);
+				foreach ($plugins as $plugin) {
+					deactivate_plugins($plugin, true); //silently deactivate the plugin
+				}
+				restore_current_blog();
 			}
 		}
 		die();
@@ -88,22 +88,22 @@ class MultisitePluginStats {
 	public function delete_plugins() {
 		$params = array();
 		parse_str($_POST['plugins'], $params);
-		var_dump($params);	
+		var_dump($params);
 		die();
 	}
-	
+
 	public function stats_page() {
 		global $wpdb;
-		
+
 		// Check Permissions
 		if (!is_site_admin())
 			die('Not on my watch!');
-			
+
 		// Get a list of all the plugins
 		$plugin_info = get_plugins();
-		
+
 		$active_plugins = array();
-		
+
 		// Get the network activated plugins
 		$network_plugins = get_site_option( 'active_sitewide_plugins');
 
@@ -119,10 +119,10 @@ class MultisitePluginStats {
 
 				// Get the name and add it to the list
 				$site_names[$blog_id] = get_option('blogname');
-				
+
 				// Get active plugins
 				$site_plugins = (array) get_option( 'active_plugins', array() );
-				
+
 				// Keep a Count
 				foreach ($site_plugins as $plugin) {
 					if (isset($active_plugins[$plugin])) {
@@ -131,13 +131,13 @@ class MultisitePluginStats {
 						$active_plugins[$plugin] = array($blog_id);
 					}
 				}
-				
+
 				restore_current_blog();
 			}
 		}
-		
-		?> 
-		
+
+		?>
+
 		<div class='wrap'>
 		<div class="icon32" id="icon-plugins"><br></div>
 		<h2><?php _e('Plugin Statistics', 'multisite_plugin_stats'); ?></h2>
@@ -168,7 +168,7 @@ class MultisitePluginStats {
 		</table>
 		<?php submit_button( __('Deactivate'),"secondary", "deactivate-network-plugins"); ?>
 		</form>
-		
+
 		<h3><?php _e('Active Plugins', 'multisite_plugin_stats'); ?> (<?php echo count($active_plugins); ?>)</h3>
 		<form name="ajaxform" id="deactivate-plugins" action="<?php admin_url( 'admin-ajax.php' ) ?>">
 			<table class="wp-list-table widefat plugin-usage-table">
@@ -204,7 +204,7 @@ class MultisitePluginStats {
 					}
 					echo "{$output} </td>";
 					echo '</tr>';
-					
+
 					// Remove it from the list
 					unset($plugin_info[$plugin]);
 					$counter++;
@@ -214,7 +214,7 @@ class MultisitePluginStats {
 			</table>
 			<?php submit_button( __('Deactivate'),"secondary", "deactivate-plugins"); ?>
 		</form>
-		
+
 		<h3><?php _e('Inactive Plugins', 'multisite_plugin_stats'); ?> (<?php echo count($plugin_info); ?>)</h3>
 		<form name="ajaxform" id="delete-plugins" action="<?php admin_url( 'admin-ajax.php' ) ?>">
 			<table class="wp-list-table widefat plugin-usage-table">
@@ -239,20 +239,20 @@ class MultisitePluginStats {
 			</table>
 			<?php submit_button( __('Delete Permanently'),"delete plugins", "delete-plugins"); ?>
 		</form>
-		
+
 		</div> <!-- .wrap -->
 	<?php
 	}
 
 	/**
 	 * Registers and enqueues admin-specific JavaScript.
-	 */	
+	 */
 	public function register_admin_scripts() {
-	
+
 		wp_enqueue_script( 'multisite-plugin-stats-admin-script', plugins_url( '/js/admin.js', __FILE__ ), array('jquery'), TRUE );
 		//Pass values to javascript
 		wp_localize_script( 'multisite-plugin-stats-admin-script', 'ajax_object',
-            array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'nonce' => wp_create_nonce( 'bulk-plugins' ) ));
+			array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'nonce' => wp_create_nonce( 'bulk-plugins' ) ));
 
 		//Dynatable for sorting plugin data
 		wp_register_script( 'multisite-plugin-stats-dynatable', plugins_url( '/js/jquery.dynatable.js', __FILE__ ) );
