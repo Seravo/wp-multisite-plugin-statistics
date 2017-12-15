@@ -207,28 +207,33 @@ class MultisitePluginStats {
 	 */
 	public function register_admin_scripts( $page ) {
 		wp_enqueue_script(
-			'multisite-plugin-stats-admin-script',
-			"{$this->plugin_url}js/admin.js",
+			'dynatable',
+			"{$this->plugin_url}js/jquery.dynatable.js",
 			array( 'jquery' ),
-			self::VERSION,
+			'0.3.1',
 			true
 		);
 
 		wp_enqueue_script(
-			'multisite-plugin-stats-dynatable',
-			"{$this->plugin_url}js/jquery.dynatable.js",
-			array( 'jquery' ),
+			'multisite-plugin-stats-admin-script',
+			"{$this->plugin_url}js/admin.js",
+			array( 'dynatable' ),
 			self::VERSION,
 			true
 		);
 
 		wp_enqueue_style(
 			'dynatable',
-			"{$this->plugin_url}css/jquery.dynatable.css"
+			"{$this->plugin_url}css/jquery.dynatable.css",
+			array(),
+			'0.3.1'
 		);
+
 		wp_enqueue_style(
 			'multisite-plugin-stats-style',
-			"{$this->plugin_url}css/admin.css"
+			"{$this->plugin_url}css/admin.css",
+			array( 'dynatable' ),
+			self::VERSION
 		);
 	}
 }
