@@ -45,7 +45,14 @@ class MultisitePluginStats {
 	}
 
 	public function add_menu() {
-		add_submenu_page( 'plugins.php', __( 'Plugin Statistics', 'multisite_plugin_stats' ), __( 'Plugin Statistics', 'multisite_plugin_stats' ), 'manage_network_options', 'multisite_plugin_stats', array( &$this, 'stats_page' ) );
+		add_submenu_page(
+			'plugins.php',
+			__( 'Plugin Statistics', 'multisite_plugin_stats' ),
+			__( 'Plugin Statistics', 'multisite_plugin_stats' ),
+			'manage_network_options',
+			'multisite_plugin_stats',
+			array( $this, 'stats_page' )
+		);
 	}
 
 	// Ajax Handlers
