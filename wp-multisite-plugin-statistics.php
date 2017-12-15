@@ -37,14 +37,19 @@ class MultisitePluginStats {
 	}
 
 	public function init() {
-		// declare hooks
 		add_action( 'network_admin_menu', array( $this, 'add_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
 		add_action( 'plugins_loaded', array( $this, 'localization' ) );
 	}
 
 	public function localization() {
-		load_plugin_textdomain( 'multisite_plugin_stats', false, '/multisite-plugin-stats/languages/' );
+		if ( is_admin() ) {
+			load_plugin_textdomain(
+				'multisite_plugin_stats',
+				false,
+				dirname( plugin_basename( __FILE__ ) ) . '/languages'
+			);
+		}
 	}
 
 	public function add_menu() {
