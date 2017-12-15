@@ -105,22 +105,21 @@ class MultisitePluginStats {
 
 		?>
 		<div class='wrap'>
-			<h2><?php _e( 'Plugin Statistics', 'multisite_plugin_stats' ); ?></h2>
-			<h3><?php _e( 'Network Activated Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $network_plugins ); ?>)</h3>
+			<h2><?php esc_html_e( 'Plugin Statistics', 'multisite_plugin_stats' ); ?></h2>
+			<h3><?php esc_html_e( 'Network Activated Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $network_plugins ); ?>)</h3>
 			<table class="wp-list-table widefat plugin-usage-table">
 				<thead>
 					<tr>
 						<th data-dynatable-no-sort="true" class="manage-column column-cb check-column">
 							<input class="column-select-all" id="network-plugins-select-all" type="checkbox">
 						</th>
-						<th><?php _e( 'Name', 'multisite_plugin_stats' ); ?></th>
-						<th><?php _e( 'Path', 'multisite_plugin_stats' ); ?></th>
+						<th><?php esc_html_e( 'Name', 'multisite_plugin_stats' ); ?></th>
+						<th><?php esc_html_e( 'Path', 'multisite_plugin_stats' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-					foreach ( $network_plugins as $plugin => $etc ) { ?>
-						<?php
+					foreach ( $network_plugins as $plugin => $etc ) {
 						echo '<tr><th scope="row" class="check-column"><input type="checkbox" name="checked[]" value="' . plugin_basename( $plugin ) . '" id=""></th>';
 						echo '<td>' . $plugin_info[ $plugin ]['Name'] . '</td>';
 						echo '<td>' . plugin_basename( $plugin ) . '</td></tr>';
@@ -131,17 +130,17 @@ class MultisitePluginStats {
 				</tbody>
 			</table>
 
-			<h3><?php _e( 'Active Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $active_plugins ); ?>)</h3>
+			<h3><?php esc_html_e( 'Active Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $active_plugins ); ?>)</h3>
 			<table class="wp-list-table widefat plugin-usage-table">
 				<thead>
 					<tr>
 						<th data-dynatable-no-sort="true" class="manage-column column-cb check-column">
 							<input class="column-select-all" id="plugins-select-all" type="checkbox">
 						</th>
-						<th><?php _e( 'Name', 'multisite_plugin_stats' ); ?></th>
-						<th><?php _e( 'Path', 'multisite_plugin_stats' ); ?></th>
-						<th data-dynatable-sorts="integer" data-dynatable-column="integer"><?php _e( 'Usage', 'multisite_plugin_stats' ); ?></th>
-						<th><?php _e( 'Sites', 'multisite_plugin_stats' ); ?></th>
+						<th><?php esc_html_e( 'Name', 'multisite_plugin_stats' ); ?></th>
+						<th><?php esc_html_e( 'Path', 'multisite_plugin_stats' ); ?></th>
+						<th data-dynatable-sorts="integer" data-dynatable-column="integer"><?php esc_html_e( 'Usage', 'multisite_plugin_stats' ); ?></th>
+						<th><?php esc_html_e( 'Sites', 'multisite_plugin_stats' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -177,15 +176,15 @@ class MultisitePluginStats {
 				</tbody>
 			</table>
 
-			<h3><?php _e( 'Inactive Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $plugin_info ); ?>)</h3>
+			<h3><?php esc_html_e( 'Inactive Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $plugin_info ); ?>)</h3>
 			<table class="wp-list-table widefat plugin-usage-table">
 				<thead>
 					<tr>
 						<th data-dynatable-no-sort="true" class="manage-column column-cb check-column">
 							<input class="column-select-all" id="unused-plugin-select-all" type="checkbox">
 						</th>
-						<th><?php _e( 'Name', 'multisite_plugin_stats' ); ?></th>
-						<th><?php _e( 'Path', 'multisite_plugin_stats' ); ?></th>
+						<th><?php esc_html_e( 'Name', 'multisite_plugin_stats' ); ?></th>
+						<th><?php esc_html_e( 'Path', 'multisite_plugin_stats' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
