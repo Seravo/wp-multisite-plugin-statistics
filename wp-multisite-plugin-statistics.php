@@ -66,39 +66,39 @@ class MultisitePluginStats {
 	public function stats_page() {
 		global $wpdb;
 
-		// Check Permissions
+		// Check Permissions.
 		if ( ! is_super_admin() ) {
 			die( 'Not on my watch!' );
 		}
 
-		// Scan the sites for activation
+		// Scan the sites for activation.
 		$blogs = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs} WHERE site_id = {$wpdb->siteid} AND spam = 0 AND deleted = 0" );
 
 		if ( ! $blogs ) {
 			return;
 		}
 
-		// Get a list of all the plugins
+		// Get a list of all the plugins.
 		$plugin_info = get_plugins();
 
 		$active_plugins = array();
 
-		// Get the network activated plugins
+		// Get the network activated plugins.
 		$network_plugins = get_site_option( 'active_sitewide_plugins' );
 
-		// Initialize the name array
+		// Initialize the name array.
 		$site_names = array();
 
 		foreach ( $blogs as $blog_id ) {
 			switch_to_blog( $blog_id );
 
-			// Get the name and add it to the list
+			// Get the name and add it to the list.
 			$site_names[ $blog_id ] = get_option( 'blogname' );
 
-			// Get active plugins
+			// Get active plugins.
 			$site_plugins = (array) get_option( 'active_plugins', array() );
 
-			// Keep a Count
+			// Keep a Count.
 			foreach ( $site_plugins as $plugin ) {
 				if ( isset( $active_plugins[ $plugin ] ) ) {
 					$active_plugins[ $plugin ][] = $blog_id;
@@ -140,7 +140,7 @@ class MultisitePluginStats {
 						echo '<td>' . plugin_basename( $plugin ) . '</td>';
 						echo '<td>' . count( $blog_array ) . '</td>';
 
-						// List the sites
+						// List the sites.
 						echo '<td> ';
 						$output = '';
 						foreach ( $blog_array as $blog_id ) {
@@ -152,7 +152,7 @@ class MultisitePluginStats {
 						echo "{$output} </td>";
 						echo '</tr>';
 
-						// Remove it from the list
+						// Remove it from the list.
 						unset( $plugin_info[ $plugin ] );
 						$counter++;
 					}
