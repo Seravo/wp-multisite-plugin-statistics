@@ -40,10 +40,6 @@ class MultisitePluginStats {
 
 	}
 
-	public function MultisitePluginStats() {
-		$this->__construct();
-	}
-
 	public function localization() {
 		load_plugin_textdomain( 'multisite_plugin_stats', false, '/multisite-plugin-stats/languages/' );
 	}
