@@ -28,7 +28,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	 02110-1301	 USA
 */
 
 class MultisitePluginStats {
+	const VERSION = '2.0.0';
+
+	public $plugin_url;
+
 	public function __construct() {
+		$this->plugin_url = plugin_dir_url( __FILE__ );
 	}
 
 	public function init() {
@@ -257,22 +262,39 @@ class MultisitePluginStats {
 	 * Registers and enqueues admin-specific JavaScript.
 	 */
 	public function register_admin_scripts() {
+		wp_enqueue_script(
+			'multisite-plugin-stats-admin-script',
+			"{$this->plugin_url}js/admin.js",
+			array( 'jquery' ),
+			self::VERSION,
+			true
+		);
+		wp_localize_script(
+			'multisite-plugin-stats-admin-script',
+			'ajax_object',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce' => wp_create_nonce( 'bulk-plugins' ),
+			)
+		);
 
-		wp_enqueue_script( 'multisite-plugin-stats-admin-script', plugins_url( '/js/admin.js', __FILE__ ), array( 'jquery' ), true );
-		// Pass values to javascript
-		wp_localize_script( 'multisite-plugin-stats-admin-script', 'ajax_object',
-		array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'nonce' => wp_create_nonce( 'bulk-plugins' ) ));
+		wp_enqueue_script(
+			'multisite-plugin-stats-dynatable',
+			"{$this->plugin_url}js/jquery.dynatable.js",
+			array( 'jquery' ),
+			self::VERSION,
+			true
+		);
 
-		// Dynatable for sorting plugin data
-		wp_register_script( 'multisite-plugin-stats-dynatable', plugins_url( '/js/jquery.dynatable.js', __FILE__ ) );
-		wp_enqueue_script( 'multisite-plugin-stats-dynatable', array( 'jquery' ) );
-
-		wp_register_style( 'dynatable', plugins_url( '/css/jquery.dynatable.css', __FILE__ ) );
-		wp_enqueue_style( 'dynatable' );
-		wp_register_style( 'multisite-plugin-stats-style', plugins_url( '/css/admin.css', __FILE__ ) );
-		wp_enqueue_style( 'multisite-plugin-stats-style' );
-	} // end register_admin_scripts
-
+		wp_enqueue_style(
+			'dynatable',
+			"{$this->plugin_url}css/jquery.dynatable.css"
+		);
+		wp_enqueue_style(
+			'multisite-plugin-stats-style',
+			"{$this->plugin_url}css/admin.css"
+		);
+	}
 }
 
 $multisite_plugin_stats = new MultisitePluginStats();
