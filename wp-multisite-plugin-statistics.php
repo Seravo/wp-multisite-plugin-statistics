@@ -111,29 +111,6 @@ class MultisitePluginStats {
 		?>
 		<div class='wrap'>
 			<h1><?php esc_html_e( 'Plugin Statistics', 'multisite_plugin_stats' ); ?></h1>
-			<h3><?php esc_html_e( 'Network Activated Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $network_plugins ); ?>)</h3>
-			<table class="wp-list-table widefat plugin-usage-table">
-				<thead>
-					<tr>
-						<th data-dynatable-no-sort="true" class="manage-column column-cb check-column">
-							<input class="column-select-all" id="network-plugins-select-all" type="checkbox">
-						</th>
-						<th><?php esc_html_e( 'Name', 'multisite_plugin_stats' ); ?></th>
-						<th><?php esc_html_e( 'Path', 'multisite_plugin_stats' ); ?></th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					foreach ( $network_plugins as $plugin => $etc ) {
-						echo '<tr><th scope="row" class="check-column"><input type="checkbox" name="checked[]" value="' . plugin_basename( $plugin ) . '" id=""></th>';
-						echo '<td>' . $plugin_info[ $plugin ]['Name'] . '</td>';
-						echo '<td>' . plugin_basename( $plugin ) . '</td></tr>';
-						// Remove it from the list
-						unset( $plugin_info[ $plugin ] );
-					}
-					?>
-				</tbody>
-			</table>
 
 			<h3><?php esc_html_e( 'Active Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $active_plugins ); ?>)</h3>
 			<table class="wp-list-table widefat plugin-usage-table">
@@ -176,6 +153,30 @@ class MultisitePluginStats {
 						// Remove it from the list
 						unset( $plugin_info[ $plugin ] );
 						$counter++;
+					}
+					?>
+				</tbody>
+			</table>
+
+			<h3><?php esc_html_e( 'Network Activated Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $network_plugins ); ?>)</h3>
+			<table class="wp-list-table widefat plugin-usage-table">
+				<thead>
+					<tr>
+						<th data-dynatable-no-sort="true" class="manage-column column-cb check-column">
+							<input class="column-select-all" id="network-plugins-select-all" type="checkbox">
+						</th>
+						<th><?php esc_html_e( 'Name', 'multisite_plugin_stats' ); ?></th>
+						<th><?php esc_html_e( 'Path', 'multisite_plugin_stats' ); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					foreach ( $network_plugins as $plugin => $etc ) {
+						echo '<tr><th scope="row" class="check-column"><input type="checkbox" name="checked[]" value="' . plugin_basename( $plugin ) . '" id=""></th>';
+						echo '<td>' . $plugin_info[ $plugin ]['Name'] . '</td>';
+						echo '<td>' . plugin_basename( $plugin ) . '</td></tr>';
+						// Remove it from the list
+						unset( $plugin_info[ $plugin ] );
 					}
 					?>
 				</tbody>
