@@ -3,7 +3,7 @@
 Plugin Name: WP Multisite Plugin Statistics
 Plugin URI: https://github.com/Seravo/wp-multisite-plugin-statistics
 Description: A multisite plugin to show plugin usage across all your sites.
-Version: 1.0
+Version: 2.0.0
 Author: Seravo Oy
 Author URI: http://seravo.fi
 License: GPL2
