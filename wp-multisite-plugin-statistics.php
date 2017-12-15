@@ -210,6 +210,10 @@ class MultisitePluginStats {
 	 * Registers and enqueues admin-specific JavaScript.
 	 */
 	public function register_admin_scripts( $page ) {
+		if ( 'plugins_page_multisite_plugin_stats' !== $page ) {
+			return;
+		}
+
 		wp_enqueue_script(
 			'dynatable',
 			"{$this->plugin_url}js/jquery.dynatable.js",
