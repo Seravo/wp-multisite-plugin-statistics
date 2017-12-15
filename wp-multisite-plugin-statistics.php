@@ -110,7 +110,7 @@ class MultisitePluginStats {
 
 		?>
 		<div class='wrap'>
-			<h2><?php esc_html_e( 'Plugin Statistics', 'multisite_plugin_stats' ); ?></h2>
+			<h1><?php esc_html_e( 'Plugin Statistics', 'multisite_plugin_stats' ); ?></h1>
 			<h3><?php esc_html_e( 'Network Activated Plugins', 'multisite_plugin_stats' ); ?> (<?php echo count( $network_plugins ); ?>)</h3>
 			<table class="wp-list-table widefat plugin-usage-table">
 				<thead>
