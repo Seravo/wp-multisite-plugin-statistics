@@ -268,5 +268,3 @@ class MultisitePluginStats {
 }
 
 $multisite_plugin_stats = new MultisitePluginStats();
-
-?>
