@@ -71,6 +71,13 @@ class MultisitePluginStats {
 			die( 'Not on my watch!' );
 		}
 
+		// Scan the sites for activation
+		$blogs = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs} WHERE site_id = {$wpdb->siteid} AND spam = 0 AND deleted = 0" );
+
+		if ( ! $blogs ) {
+			return;
+		}
+
 		// Get a list of all the plugins
 		$plugin_info = get_plugins();
 
@@ -82,30 +89,25 @@ class MultisitePluginStats {
 		// Initialize the name array
 		$site_names = array();
 
-		// Scan the sites for activation
-		$blogs = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs} WHERE site_id = {$wpdb->siteid} AND spam = 0 AND deleted = 0" );
+		foreach ( $blogs as $blog_id ) {
+			switch_to_blog( $blog_id );
 
-		if ( $blogs ) {
-			foreach ( $blogs as $blog_id ) {
-				switch_to_blog( $blog_id );
+			// Get the name and add it to the list
+			$site_names[ $blog_id ] = get_option( 'blogname' );
 
-				// Get the name and add it to the list
-				$site_names[ $blog_id ] = get_option( 'blogname' );
+			// Get active plugins
+			$site_plugins = (array) get_option( 'active_plugins', array() );
 
-				// Get active plugins
-				$site_plugins = (array) get_option( 'active_plugins', array() );
-
-				// Keep a Count
-				foreach ( $site_plugins as $plugin ) {
-					if ( isset( $active_plugins[ $plugin ] ) ) {
-						$active_plugins[ $plugin ][] = $blog_id;
-					} else {
-						$active_plugins[ $plugin ] = array( $blog_id );
-					}
+			// Keep a Count
+			foreach ( $site_plugins as $plugin ) {
+				if ( isset( $active_plugins[ $plugin ] ) ) {
+					$active_plugins[ $plugin ][] = $blog_id;
+				} else {
+					$active_plugins[ $plugin ] = array( $blog_id );
 				}
-
-				restore_current_blog();
 			}
+
+			restore_current_blog();
 		}
 
 		?>
