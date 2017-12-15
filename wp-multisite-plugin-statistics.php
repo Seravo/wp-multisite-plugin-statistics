@@ -191,6 +191,9 @@ class MultisitePluginStats {
 			<?php
 				$counter = 0;
 			foreach ( $active_plugins as $plugin => $blog_array ) {
+				if ( empty( $plugin_info[ $plugin ] ) ) {
+					continue;
+				}
 				echo '<tr><th scope="row" class="check-column"><input type="checkbox" name="checked[]" value="' . plugin_basename( $plugin ) . '" id=""></th>';
 
 				echo '<td>' . $plugin_info[ $plugin ]['Name'] . '</td>';
