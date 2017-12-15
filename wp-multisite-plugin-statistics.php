@@ -96,7 +96,7 @@ class MultisitePluginStats {
 		global $wpdb;
 
 		// Check Permissions
-		if ( ! is_site_admin() ) {
+		if ( ! is_super_admin() ) {
 			die( 'Not on my watch!' );
 		}
 
